@@ -1,10 +1,12 @@
 package com.spring.config;
 
 import com.spring.bean.Color;
+import com.spring.bean.ColorFactoryBean;
 import com.spring.bean.Person;
 import com.spring.bean.Red;
 import com.spring.condition.LinuxCondition;
 import com.spring.condition.WindowsCondition;
+import com.spring.importer.MyImportBeanDefinitionRegistrar;
 import com.spring.importer.MyImportSelector;
 import org.springframework.context.annotation.*;
 
@@ -15,7 +17,7 @@ import org.springframework.context.annotation.*;
 //满足当前条件，类中配置的所有bean信息才会生效
 @Conditional({WindowsCondition.class})
 @Configuration
-@Import({Color.class, Red.class, MyImportSelector.class})
+@Import({Color.class, Red.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class})
 public class MainConfig2 {
 
     /**
@@ -57,7 +59,14 @@ public class MainConfig2 {
      * 1）包扫描方式+组件注解标注，通过@Controller @Service @Repository @Component [一般用于自己写的类]
      * 2) @Bean导入第三方包的组件
      * 3）@Import[快速向容器中导入一个组件] 作用域为类
-     *      1）{@link Import}@Import({要导入的组件类class})将传入class对象，通过无参构造方法创建bean ，id默认为全路径名
-     *      2）传入{@link ImportSelector}类，返回需要导入的组件的全类名数组，通过无参构造方法创建bean，id为全路径名
+     * a {@link Import}@Import({要导入的组件类class})将传入class对象，通过无参构造方法创建bean ，id默认为全路径名
+     * b 传入{@link ImportSelector}类，返回需要导入的组件的全类名数组，通过无参构造方法创建bean，id为全路径名
+     * c 传入{@link ImportBeanDefinitionRegistrar}类，返回需要导入的组件的全类名数组，通过无参构造方法创建bean，id为全路径名
+     * 4）使用spring提供的beanFactory
      */
+
+    @Bean
+    public ColorFactoryBean colorFactoryBean() {
+        return new ColorFactoryBean();
+    }
 }

@@ -3,10 +3,12 @@ package com.spring.test;
 import com.spring.bean.Person;
 import com.spring.config.MainConfig2;
 import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author zhouj
@@ -59,5 +61,28 @@ public class IocTest {
         for (String name : beanNames) {
             System.out.println(name);
         }
+        int stride;
     }
+
+    /**
+     * {@link BeanFactory } FACTORY_BEAN_PREFIX = "&" 所以用&来取colorFactoryBean实际对象
+     */
+    @Test
+    public void testGetBeanFactory() {
+        //获取的是colorFactoryBean里定义的对象，而非@Bean返回的工厂对象
+        Object colorFactoryBean = this.annoContext.getBean("colorFactoryBean");
+        Object colorFactoryBean2 = this.annoContext.getBean("colorFactoryBean");
+        Object colorFactoryBean3 = this.annoContext.getBean("colorFactoryBean");
+
+        //获取@Bean返回的工厂对象
+        Object colorFactoryBean4 = this.annoContext.getBean("&colorFactoryBean");
+        System.out.println(colorFactoryBean.getClass());
+        System.out.println(colorFactoryBean2.getClass());
+        System.out.println(colorFactoryBean4.getClass());
+        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap<>();
+
+        int n = 1, stride;
+        System.out.println(n);
+    }
+
 }
