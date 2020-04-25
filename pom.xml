@@ -14,6 +14,7 @@
         <module>demo-concurrent</module>
         <module>demo-spi</module>
         <module>com-jdk8</module>
+        <module>demo-jdk8</module>
     </modules>
 
 
