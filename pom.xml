@@ -12,6 +12,8 @@
         <module>demo-spring</module>
         <module>demo-spring-jar</module>
         <module>demo-concurrent</module>
+        <module>demo-spi</module>
+        <module>com-jdk8</module>
     </modules>
 
 

@@ -1,5 +1,7 @@
 package com.curr.volat;
 
+import javax.security.auth.Subject;
+import java.lang.reflect.Proxy;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,6 +16,8 @@ public class TestVolatile {
 
     public static void main(String args[]) {
         //启动一个线程，当发现local_value与init_value不同时，则输出init_value被修改的值
+
+
         new Thread(() -> {
             int localValue = init_value;
             while (localValue < max) {
