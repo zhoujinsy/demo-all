@@ -1,0 +1,6 @@
+// 授权工程 A 执行文件路径中文件在本目录中的写文件权限
+grant codebase "file:/E:/ideaworkspace/AllTest/demo-all/demo-jdk8/src/main/java/com/jdk8/security/aspace"
+{
+ permission java.io.FilePermission
+   "E:\ideaworkspace\AllTest\demo-all\demo-jdk8\src\main\java\com\jdk8\security\aspace\\*", "write";
+};
